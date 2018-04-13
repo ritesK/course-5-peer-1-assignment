@@ -1,0 +1,19 @@
+library(knitr)
+library(ggplot2)
+library(dplyr)
+
+temp <- tempfile()
+download.file("https://d396qusza40orc.cloudfront.net/repdata%2Fdata%2Factivity.zip", temp, mode="wb")
+unzip(temp, "activity.csv")
+activity <- read.csv("activity.csv",header=T)
+unlink(temp)
+
+## converting dates to Y-M-D format
+activity$date <- as.Date(activity$date, "%Y-%m-%d")
+## calculate steps as it relates to date using SUM (per day)
+hist(totalstepsperday$steps, 
+    main="Total Steps per Day", 
+    xlab="Number of Steps per Day", 
+    ylab = "Interval",
+    col="orange",
+    breaks=50)
